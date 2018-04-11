@@ -69,8 +69,11 @@ Player.prototype.update = function(dt) {
     }
 
     //if reached water then reset game
-    if (this.y < 0)
+    if (this.y < 0) {
+        //alert the player upon winning the game.
+        alert('YOU WON');
         resetGame();
+    }
 
 };
 
