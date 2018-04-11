@@ -9,4 +9,5 @@ This game was created as a part of [Udacity](http://udacity.com) Front End Nanod
 
 ## Get Started
 To open the game, just open index.html file in the repository main directory with your favourite browser.
+
 *N*.*B*. The browser should support JS.
