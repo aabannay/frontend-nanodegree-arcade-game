@@ -1,7 +1,15 @@
-// Enemies our player must avoid
+//variables for the game
 var CANVAS_WIDTH = 505;
 var CANVAS_HEIGHT = 606;
-
+var MIN_SPEED = 50;
+var MAX_SPEED = 200;
+var PLAYER_X = 202; //initial position of the player on X axis
+var PLAYER_Y = 400;  //initial position of the player on Y axix
+var X_MOVE = 101; //movement on the X axis
+var Y_MOVE = 90; //movement on the Y axis
+var START_EDGE = 0;
+var END_EDGE = 400;
+// Enemies our player must avoid
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -9,9 +17,12 @@ var Enemy = function(x, y) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    //location of the enemy on x,y coordinates.
     this.x = x;
     this.y = y;
-    this.speed = Math.floor(Math.random() * 200) + 50;
+    //the speed of the enemy movement.
+    //this is assigned randomly when enemy is created.
+    this.speed = Math.floor(Math.random() * MAX_SPEED) + MIN_SPEED;
 };
 
 // Update the enemy's position, required method for game
@@ -24,7 +35,7 @@ Enemy.prototype.update = function(dt) {
     //recycle enimies when they pass off the screen
     if (this.x < CANVAS_WIDTH)
         this.x += this.speed * dt;
-    else //off the screen bring back
+    else //off the screen bring back. Start on -30 after recycle.
         this.x = -30;
 };
 
@@ -37,28 +48,29 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
+    //sprite method for the charecter
     this.sprite = 'images/char-boy.png';
-    this.x = 202;
-    this.y = 400;
-    this.speed = 90;
+    //starting position of the player
+    this.x = PLAYER_X;
+    this.y = PLAYER_Y;
+    this.speed = MIN_SPEED * 1.5;
 };
 
 Player.prototype.update = function(dt) {
     //update the location of the player based on the key pressed
-    if (this.key === 'left' && this.x > 0)
-        this.x = this.x - 101;
-    else if (this.key === 'right' && this.x < 400)
-        this.x = this.x + 101;
-    else if (this.key === 'up' && this.y > 0)
-        this.y = this.y - 90;
-    else if (this.key === 'down' && this.y < 400)
-        this.y = this.y + 90;
+
+    if (this.key === 'left' && this.x > START_EDGE)
+        this.x = this.x - X_MOVE;
+    else if (this.key === 'right' && this.x < END_EDGE)
+        this.x = this.x + X_MOVE;
+    else if (this.key === 'up' && this.y > START_EDGE)
+        this.y = this.y - Y_MOVE;
+    else if (this.key === 'down' && this.y < END_EDGE)
+        this.y = this.y + Y_MOVE;
     else ;
     //this is to reset the key since
     //if removed, one click will move to the edge.
     this.key = undefined;
-
-
 
     //check for hit with any enemy.
     for (var i = 0; i < allEnemies.length; i++) {
@@ -82,6 +94,7 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(key) {
+    //the key pressed and received from event listener below.
     this.key = key;
 }
 
@@ -104,13 +117,18 @@ function hit(anEnemy, aPlayer){
 // Place the player object in a variable called player
 var allEnemies = [];
 
+//function to add the enemies to the array of enemies and set the positions
+//these positions are chosen based on testing done during development.
 function addEnimies(theEnemies){
     theEnemies.push(new Enemy(0, 60));
     theEnemies.push(new Enemy(-40, 140));
     theEnemies.push(new Enemy(25, 230));
 }
 
+//call adding enemies function
 addEnimies(allEnemies);
+
+//make a player variable that is an instant of the player class.
 var player = new Player();
 
 
@@ -130,8 +148,8 @@ document.addEventListener('keyup', function(e) {
 
 //to reset the game and return player to initial place
 function resetGame() {
-    player.x = 202;
-    player.y = 400;
+    player.x = PLAYER_X;
+    player.y = PLAYER_Y;
     allEnemies = [];
     addEnimies(allEnemies);
 }
