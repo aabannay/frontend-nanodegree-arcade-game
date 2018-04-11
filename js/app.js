@@ -11,7 +11,7 @@ var Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = 200;
+    this.speed = Math.floor(Math.random() * 200) + 50;
 };
 
 // Update the enemy's position, required method for game
@@ -25,7 +25,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x < CANVAS_WIDTH)
         this.x += this.speed * dt;
     else //off the screen bring back
-        this.x = this.speed * dt;
+        this.x = -30;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -58,14 +58,20 @@ Player.prototype.update = function(dt) {
     //if removed, one click will move to the edge.
     this.key = undefined;
 
-    var self = this;
 
+
+    //check for hit with any enemy.
     for (var i = 0; i < allEnemies.length; i++) {
         if (hit(allEnemies[i], this)){
             //collesion occurred. Reset Game
             resetGame();
         }
     }
+
+    //if reached water then reset game
+    if (this.y < 0)
+        resetGame();
+
 };
 
 Player.prototype.render = function() {
@@ -85,7 +91,7 @@ function hit(anEnemy, aPlayer){
         aPlayer.x < anEnemy.x + 50 &&
         aPlayer.y >= anEnemy.y - 45 &&
         aPlayer.y < anEnemy.y + 45 ){
-        resetGame();
+        return true;
     }
 }
 
@@ -98,7 +104,7 @@ var allEnemies = [];
 function addEnimies(theEnemies){
     theEnemies.push(new Enemy(0, 60));
     theEnemies.push(new Enemy(-40, 140));
-    theEnemies.push(new Enemy(0, 230));
+    theEnemies.push(new Enemy(25, 230));
 }
 
 addEnimies(allEnemies);
