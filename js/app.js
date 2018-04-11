@@ -1,4 +1,7 @@
 // Enemies our player must avoid
+var CANVAS_WIDTH = 505;
+var CANVAS_HEIGHT = 606;
+
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -17,7 +20,12 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += this.speed * dt;
+
+
+    if (this.x < CANVAS_WIDTH)
+        this.x += this.speed * dt;
+    else //off the screen bring back
+        this.x = this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
