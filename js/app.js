@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-
+    //recycle enimies when they pass off the screen
     if (this.x < CANVAS_WIDTH)
         this.x += this.speed * dt;
     else //off the screen bring back
@@ -50,6 +50,10 @@ Player.prototype.update = function(dt) {
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+Player.prototype.handleInput = function(key) {
+    this.key = key;
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
