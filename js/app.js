@@ -63,6 +63,7 @@ Player.prototype.update = function(dt) {
     for (var i = 0; i < allEnemies.length; i++) {
         if (hit(allEnemies[i], this)){
             //collesion occurred. Reset Game
+            resetGame();
         }
     }
 };
@@ -83,8 +84,9 @@ function hit(anEnemy, aPlayer){
     if (aPlayer.x >= anEnemy.x - 50 &&
         aPlayer.x < anEnemy.x + 50 &&
         aPlayer.y >= anEnemy.y - 45 &&
-        aPlayer.y < anEnemy.y + 45 )
-        console.log('hit hit hit');
+        aPlayer.y < anEnemy.y + 45 ){
+        resetGame();
+    }
 }
 
 
@@ -93,13 +95,13 @@ function hit(anEnemy, aPlayer){
 // Place the player object in a variable called player
 var allEnemies = [];
 
-function addEnimies(){
-    allEnemies.push(new Enemy(0, 60));
-    allEnemies.push(new Enemy(-40, 140));
-    allEnemies.push(new Enemy(0, 230));
+function addEnimies(theEnemies){
+    theEnemies.push(new Enemy(0, 60));
+    theEnemies.push(new Enemy(-40, 140));
+    theEnemies.push(new Enemy(0, 230));
 }
 
-addEnimies();
+addEnimies(allEnemies);
 var player = new Player();
 
 
@@ -115,3 +117,12 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+//to reset the game and return player to initial place
+function resetGame() {
+    player.x = 202;
+    player.y = 400;
+    allEnemies = [];
+    addEnimies(allEnemies);
+}
