@@ -44,7 +44,10 @@ var Player = function() {
 };
 
 Player.prototype.update = function(dt) {
-
+    //update the location of the player based on the key pressed
+    if (this.key === 'left' && this.x > 0)
+        this.x = this.x - 101;
+    this.key = undefined;
 };
 
 Player.prototype.render = function() {
