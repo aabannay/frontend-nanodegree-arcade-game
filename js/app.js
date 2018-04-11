@@ -30,9 +30,9 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
     this.sprite = 'images/char-boy.png';
-    this.x= 200;
-    this.y= 200;
-    this.speed = 200;
+    this.x = 200;
+    this.y = 400;
+    this.speed = 90;
 };
 
 Player.prototype.update = function(dt) {
@@ -47,6 +47,13 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 var allEnemies = [];
 
+function addEnimies(){
+    allEnemies.push(new Enemy(0, 60));
+    allEnemies.push(new Enemy(-40, 140));
+    allEnemies.push(new Enemy(0, 230));
+}
+
+addEnimies();
 var player = new Player();
 
 
