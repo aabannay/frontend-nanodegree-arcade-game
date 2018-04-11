@@ -47,6 +47,13 @@ Player.prototype.update = function(dt) {
     //update the location of the player based on the key pressed
     if (this.key === 'left' && this.x > 0)
         this.x = this.x - 101;
+    else if (this.key === 'right' && this.x < 400)
+        this.x = this.x + 101;
+    else if (this.key === 'up' && this.y > 0)
+        this.y = this.y - 90;
+    else if (this.key === 'down' && this.y < 400)
+        this.y = this.y + 90;
+    else ;
     this.key = undefined;
 };
 
