@@ -38,13 +38,13 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
     this.sprite = 'images/char-boy.png';
-    this.x = 200;
+    this.x = 202;
     this.y = 400;
     this.speed = 90;
 };
 
 Player.prototype.update = function(dt) {
-    this.x = this.speed * dt;
+
 };
 
 Player.prototype.render = function() {
