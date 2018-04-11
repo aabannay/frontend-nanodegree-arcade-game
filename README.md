@@ -11,3 +11,6 @@ This game was created as a part of [Udacity](http://udacity.com) Front End Nanod
 To open the game, just open index.html file in the repository main directory with your favourite browser.
 
 *N*.*B*. The browser should support JS.
+
+## Play the game
+If you want to try the game, [click here](https://aabannay.github.io/frontend-nanodegree-arcade-game/)
