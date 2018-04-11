@@ -54,7 +54,17 @@ Player.prototype.update = function(dt) {
     else if (this.key === 'down' && this.y < 400)
         this.y = this.y + 90;
     else ;
+    //this is to reset the key since
+    //if removed, one click will move to the edge.
     this.key = undefined;
+
+    var self = this;
+
+    for (var i = 0; i < allEnemies.length; i++) {
+        if (hit(allEnemies[i], this)){
+            //collesion occurred. Reset Game
+        }
+    }
 };
 
 Player.prototype.render = function() {
@@ -64,6 +74,20 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(key) {
     this.key = key;
 }
+
+function hit(anEnemy, aPlayer){
+    //this will determin if the enemy front reached the player body
+    //i.e. a hit made.
+    //each box is 100px wide and 90px hight, devide by two gives the
+    //below numbers used in the addition. Testing confirmed effecient
+    if (aPlayer.x >= anEnemy.x - 50 &&
+        aPlayer.x < anEnemy.x + 50 &&
+        aPlayer.y >= anEnemy.y - 45 &&
+        aPlayer.y < anEnemy.y + 45 )
+        console.log('hit hit hit');
+}
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
