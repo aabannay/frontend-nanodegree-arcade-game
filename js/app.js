@@ -96,7 +96,7 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(key) {
     //the key pressed and received from event listener below.
     this.key = key;
-}
+};
 
 function hit(anEnemy, aPlayer){
     //this will determin if the enemy front reached the player body
